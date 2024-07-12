@@ -1,0 +1,188 @@
+[gd_scene load_steps=14 format=3 uid="uid://cvwxfve732d07"]
+
+[ext_resource type="Script" path="res://idle_world.gd" id="1_5r225"]
+[ext_resource type="Texture2D" uid="uid://c3d2lcmeavluy" path="res://IdleFight Design/playerAT.png" id="2_4crsg"]
+[ext_resource type="Texture2D" uid="uid://dveq3rd4j4bft" path="res://IdleFight Design/playerIDLE.png" id="2_bb67i"]
+[ext_resource type="Texture2D" uid="uid://biothilhswqgd" path="res://IdleFight Design/playerDMG.png" id="3_0bw0a"]
+[ext_resource type="Texture2D" uid="uid://dyqdvet68kkc" path="res://IdleFight Design/enemyIDLE.png" id="3_2sctb"]
+[ext_resource type="Texture2D" uid="uid://otyr8xhhcsyf" path="res://IdleFight Design/normalsize/button02.png" id="4_5a0ia"]
+[ext_resource type="Texture2D" uid="uid://bd7jcxxjtlj7w" path="res://IdleFight Design/enemyAT.png" id="5_8t210"]
+[ext_resource type="Texture2D" uid="uid://c77gcp2qur3y0" path="res://IdleFight Design/normalsize/button01.png" id="5_t3f6j"]
+[ext_resource type="Texture2D" uid="uid://chh8ynhtnmyp3" path="res://IdleFight Design/normalsize/button04.png" id="6_8wfmr"]
+[ext_resource type="Texture2D" uid="uid://dpobokqt1j4p4" path="res://IdleFight Design/enemyDMG.png" id="6_xby2r"]
+[ext_resource type="Texture2D" uid="uid://ccn41aggudvmq" path="res://IdleFight Design/normalsize/button03.png" id="7_ret45"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yrbqi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4crsg")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0bw0a")
+}],
+"loop": true,
+"name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bb67i")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gc4v2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8t210")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_xby2r")
+}],
+"loop": true,
+"name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2sctb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Idle_World" type="Node"]
+script = ExtResource("1_5r225")
+
+[node name="Player" type="AnimatedSprite2D" parent="."]
+position = Vector2(301, 326)
+sprite_frames = SubResource("SpriteFrames_yrbqi")
+animation = &"idle"
+
+[node name="Enemy" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(863, 316)
+sprite_frames = SubResource("SpriteFrames_gc4v2")
+animation = &"idle"
+
+[node name="Fight_Button" type="TextureButton" parent="."]
+offset_left = 443.0
+offset_top = 58.0
+offset_right = 699.0
+offset_bottom = 186.0
+texture_normal = ExtResource("4_5a0ia")
+texture_pressed = ExtResource("5_t3f6j")
+
+[node name="Labels" type="Node" parent="."]
+
+[node name="Coin_Label" type="Label" parent="Labels"]
+offset_right = 62.0
+offset_bottom = 26.0
+text = "Coin = 0"
+
+[node name="Player_Health" type="Label" parent="Labels"]
+offset_left = 218.0
+offset_top = 466.0
+offset_right = 371.0
+offset_bottom = 492.0
+text = "Player Health =  200"
+
+[node name="Enemy_Health" type="Label" parent="Labels"]
+offset_left = 815.0
+offset_top = 460.0
+offset_right = 972.0
+offset_bottom = 486.0
+text = "Enemy Health =  100"
+
+[node name="Attack_Point_Player" type="Label" parent="Labels"]
+offset_left = 221.0
+offset_top = 507.0
+offset_right = 351.0
+offset_bottom = 533.0
+text = "Attack Point = 25"
+
+[node name="Attack_Point_Enemy" type="Label" parent="Labels"]
+offset_left = 814.0
+offset_top = 502.0
+offset_right = 944.0
+offset_bottom = 528.0
+text = "Attack Point = 1"
+
+[node name="Level_Label" type="Label" parent="Labels"]
+offset_left = 88.0
+offset_top = -2.0
+offset_right = 164.0
+offset_bottom = 24.0
+text = "Seviye = 0"
+
+[node name="Info" type="Label" parent="Labels"]
+offset_left = 481.0
+offset_top = 480.0
+offset_right = 690.0
+offset_bottom = 506.0
+text = "Dinlnmek için 2 coin lazım
+"
+
+[node name="Info_Two" type="Label" parent="Labels"]
+offset_left = 3.0
+offset_top = 615.0
+offset_right = 257.0
+offset_bottom = 641.0
+text = "Seviye atlamak için 5 coin biriktir"
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Enemy_attack_Timer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="Player_attack_Timer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="Wait_Timer" type="Timer" parent="Timers"]
+wait_time = 7.0
+one_shot = true
+
+[node name="Begin_Timer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="Health_Timer" type="Timer" parent="Timers"]
+
+[node name="Restore_Helath" type="TextureButton" parent="."]
+offset_left = 451.0
+offset_top = 301.0
+offset_right = 707.0
+offset_bottom = 429.0
+texture_normal = ExtResource("6_8wfmr")
+texture_pressed = ExtResource("7_ret45")
+
+[node name="Level_Up_Button" type="Button" parent="."]
+offset_left = 6.0
+offset_top = 547.0
+offset_right = 109.0
+offset_bottom = 601.0
+text = "SEVİYE ATLA
+5 COIN"
+
+[connection signal="pressed" from="Fight_Button" to="." method="_on_fight_button_pressed"]
+[connection signal="timeout" from="Timers/Enemy_attack_Timer" to="." method="_on_enemy_attack_timer_timeout"]
+[connection signal="timeout" from="Timers/Player_attack_Timer" to="." method="_on_player_attack_timer_timeout"]
+[connection signal="timeout" from="Timers/Wait_Timer" to="." method="_on_wait_timer_timeout"]
+[connection signal="timeout" from="Timers/Begin_Timer" to="." method="_on_begin_timer_timeout"]
+[connection signal="timeout" from="Timers/Health_Timer" to="." method="_on_health_timer_timeout"]
+[connection signal="pressed" from="Restore_Helath" to="." method="_on_restore_helath_pressed"]
+[connection signal="pressed" from="Level_Up_Button" to="." method="_on_level_up_button_pressed"]

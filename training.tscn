@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg2u3oxxu4egj"]
+
+[ext_resource type="Script" path="res://Training.gd" id="1_gq11w"]
+[ext_resource type="Texture2D" uid="uid://qg03rp5pdo4" path="res://icon.svg" id="2_8ja7f"]
+
+[node name="Training" type="Node"]
+script = ExtResource("1_gq11w")
+
+[node name="AimButton" type="TextureButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("2_8ja7f")
+
+[node name="Appear" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="WinOrLose" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "You Level Up Depends on YOUR PERFORMANCE.
+Level up click three times randomly apparing button."
+
+[node name="Wait" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[node name="Lose" type="Timer" parent="."]
+wait_time = 28.0
+one_shot = true
+autostart = true
+
+[connection signal="pressed" from="AimButton" to="." method="_on_aim_button_pressed"]
+[connection signal="timeout" from="Appear" to="." method="_on_appear_timeout"]
+[connection signal="timeout" from="Wait" to="." method="_on_wait_timeout"]
+[connection signal="timeout" from="Lose" to="." method="_on_lose_timeout"]
